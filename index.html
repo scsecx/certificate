@@ -1,65 +1,74 @@
-<!DOCTYPE html>
+<!DOCTYPE HTML>
 <html>
 <head>
 <meta charset="utf-8">
-<title>证书查询</title>
+<title>证书信息</title>
+
+<script src="https://cdn.jsdelivr.net/npm/qrcodejs/qrcode.min.js"></script>
+
 <style>
-body { font-family: Arial; text-align: center; }
-input { padding: 8px; width: 250px; }
-button { padding: 8px 15px; }
-table { margin: 20px auto; border-collapse: collapse; }
-td { border: 1px solid #ccc; padding: 10px 20px; }
+*{margin:0; padding:0; border:0;}
+.bxytab table {
+    width: 500px;
+    background:#d4e1ea;
+    margin:40px auto;
+    border-collapse: collapse;
+    font-size:14px;
+}
+.bxytab table tr { border: 1px solid #fff;}
+.bxytab table th {
+    width: 45%;
+    padding-right:20px;
+    color: #4d4b47;
+    border-right: 1px solid #fff;
+    font-weight:normal;
+    text-align:right;
+}
+.bxytab table td {
+    line-height: 34px;
+    padding: 3px 20px;
+    color: #4d4b47;
+}
+#qrcode img{
+    width:150px;
+    height:150px;
+    border:10px solid #fff;
+}
+.bxytab table tr:nth-child(odd){background:#c3c1c2;}
+
+@media (max-width:1000px){
+  .bxytab table{ width:100%;font-size:18px;}
+}
 </style>
 </head>
 
 <body>
 
-<h2>证书查询系统</h2>
-
-<input id="keyword" placeholder="输入姓名或证书编号">
-<button onclick="search()">查询</button>
-
-<div id="result"></div>
+<div class="bxytab">
+<table>
+<tbody>
+<tr>
+    <th></th>
+    <td id="qrcode"></td>
+</tr>
+<tr><th>姓名：</th><td>彭高荣</td></tr>
+<tr><th>性别：</th><td>男</td></tr>
+<tr><th>编号：</th><td>01801888</td></tr>
+<tr><th>身份证号：</th><td>513922198611011857</td></tr>
+<tr><th>工种：</th><td>有害生物防制员高级</td></tr>
+<tr><th>颁发日期：</th><td>2023-12-16</td></tr>
+<tr><th>年审日期：</th><td>长期</td></tr>
+</tbody>
+</table>
+</div>
 
 <script>
-// 你的数据（直接往这里加）
-const data = [
-  {
-    name: "燕江龙",
-    idcard: "622825200004151514",
-    cert: "WJGC202512000089",
-    date: "2025-12-16"
-  },
-  {
-    name: "朱明兴",
-    idcard: "500229199909241117",
-    cert: "WJGC202512000092",
-    date: "2025-12-16"
-  }
-];
-
-// 查询函数
-function search() {
-  const key = document.getElementById("keyword").value;
-  const resultDiv = document.getElementById("result");
-
-  const res = data.find(item => 
-    item.name === key || item.cert === key
-  );
-
-  if (res) {
-    resultDiv.innerHTML = `
-      <table>
-        <tr><td>姓名</td><td>${res.name}</td></tr>
-        <tr><td>身份证</td><td>${res.idcard}</td></tr>
-        <tr><td>证书编号</td><td>${res.cert}</td></tr>
-        <tr><td>发证日期</td><td>${res.date}</td></tr>
-      </table>
-    `;
-  } else {
-    resultDiv.innerHTML = "<p>未查询到信息</p>";
-  }
-}
+// 👉 二维码内容（可以改成任意链接）
+new QRCode(document.getElementById("qrcode"), {
+    text: window.location.href, // 当前页面地址
+    width:150,
+    height:150
+});
 </script>
 
 </body>
