@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>证书查询</title>
+<style>
+body { font-family: Arial; text-align: center; }
+input { padding: 8px; width: 250px; }
+button { padding: 8px 15px; }
+table { margin: 20px auto; border-collapse: collapse; }
+td { border: 1px solid #ccc; padding: 10px 20px; }
+</style>
+</head>
+
+<body>
+
+<h2>证书查询系统</h2>
+
+<input id="keyword" placeholder="输入姓名或证书编号">
+<button onclick="search()">查询</button>
+
+<div id="result"></div>
+
+<script>
+// 你的数据（直接往这里加）
+const data = [
+  {
+    name: "燕江龙",
+    idcard: "622825200004151514",
+    cert: "WJGC202512000089",
+    date: "2025-12-16"
+  },
+  {
+    name: "朱明兴",
+    idcard: "500229199909241117",
+    cert: "WJGC202512000092",
+    date: "2025-12-16"
+  }
+];
+
+// 查询函数
+function search() {
+  const key = document.getElementById("keyword").value;
+  const resultDiv = document.getElementById("result");
+
+  const res = data.find(item => 
+    item.name === key || item.cert === key
+  );
+
+  if (res) {
+    resultDiv.innerHTML = `
+      <table>
+        <tr><td>姓名</td><td>${res.name}</td></tr>
+        <tr><td>身份证</td><td>${res.idcard}</td></tr>
+        <tr><td>证书编号</td><td>${res.cert}</td></tr>
+        <tr><td>发证日期</td><td>${res.date}</td></tr>
+      </table>
+    `;
+  } else {
+    resultDiv.innerHTML = "<p>未查询到信息</p>";
+  }
+}
+</script>
+
+</body>
+</html>
